@@ -20,14 +20,14 @@
 7. Click "Create repository"
 
 ### 2. Connect Local Repository to GitHub
-Copy and run these commands in your terminal (replace `YOUR_USERNAME` with your GitHub username):
+Copy and run these commands in your terminal:
 
 ```bash
 # Navigate to project directory
 cd "C:\Users\korup\OneDrive\Desktop\Flam assignment"
 
 # Add GitHub remote
-git remote add origin https://github.com/YOUR_USERNAME/android-opencv-opengl-assessment.git
+git remote add origin https://github.com/Bhargavk055/android-opencv-opengl-assessment.git
 
 # Push all commits to GitHub
 git branch -M main
@@ -38,13 +38,13 @@ git push -u origin main
 Before pushing, update your Git identity:
 
 ```bash
-# Replace with your actual information
-git config user.name "Your Full Name"
-git config user.email "your.email@domain.com"
+# Set your actual information
+git config user.name "K.Bhargav"
+git config user.email "korupolu1681@gmail.com"
 
 # Update the commits with correct author info
 git commit --amend --reset-author --no-edit
-git rebase --exec "git commit --amend --reset-author --no-edit" HEAD~10
+git rebase --exec "git commit --amend --reset-author --no-edit" HEAD~11
 ```
 
 ### 4. Verify Repository
@@ -57,13 +57,13 @@ After pushing, check your GitHub repository has:
 ## 📝 Assignment Submission
 
 ### Repository URL Format
-Your submission URL should be:
+Your submission URL will be:
 ```
-https://github.com/YOUR_USERNAME/android-opencv-opengl-assessment
+https://github.com/Bhargavk055/android-opencv-opengl-assessment
 ```
 
 ### Key Points for Evaluators
-1. **Clean Commit History**: 11 commits showing development progression
+1. **Clean Commit History**: 12 commits showing development progression
 2. **Professional Documentation**: Comprehensive README with setup instructions
 3. **Complete Implementation**: All assignment requirements met
 4. **Modular Structure**: Proper separation of Android, C++, and Web components
