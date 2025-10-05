@@ -35,17 +35,6 @@ A real-time edge detection viewer that captures camera frames, processes them us
 - ✅ **Modular Project Structure**: Clean separation of concerns across components
 - ✅ **Error Handling**: Robust error management throughout the pipeline
 
-## � Working App Screenshots
-
-The following screenshots demonstrate the app successfully running on a **OnePlus CPH2381** device:
-
-### Edge Detection ON
-![Edge Detection Enabled](screenshots/edge-detection-on.jpg)
-*Real-time edge detection processing at 21+ FPS*
-
-### Edge Detection OFF  
-![Raw Camera Feed](screenshots/edge-detection-off.jpg)
-*Original camera feed without processing*
 
 ### Key Features Demonstrated:
 - ✅ **Real-time Performance**: Achieving 21+ FPS on device
