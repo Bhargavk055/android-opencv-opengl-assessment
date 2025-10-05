@@ -8,8 +8,6 @@
 ## 🎯 Project Overview
 A real-time edge detection viewer that captures camera frames, processes them using OpenCV in C++, and displays the processed output using OpenGL ES. Includes a TypeScript web viewer for demonstration and debugging.
 
-**Duration**: 3 Days Technical Assessment  
-**Position**: RnD Intern  
 **Focus**: Native-C++ integration, OpenCV processing, OpenGL rendering, Web integration
 
 ## ✅ Features Implemented
