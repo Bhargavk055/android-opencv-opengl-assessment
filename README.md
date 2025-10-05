@@ -78,7 +78,7 @@ A real-time edge detection viewer that captures camera frames, processes them us
 
 #### 1. Clone Repository
 ```bash
-git clone [your-repo-url]
+git clone https://github.com/Bhargavk055/android-opencv-opengl-assessment.git
 cd android-opencv-opengl-assessment
 ```
 
