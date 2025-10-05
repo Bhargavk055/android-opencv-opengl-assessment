@@ -1,0 +1,22 @@
+{
+  "name": "edge-detection-web-viewer",
+  "version": "1.0.0",
+  "description": "TypeScript web viewer for Android edge detection app",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "dev": "tsc && python -m http.server 8080",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "keywords": ["opencv", "edge-detection", "android", "typescript"],
+  "author": "Flam Assessment",
+  "license": "MIT"
+}
+
+
+
