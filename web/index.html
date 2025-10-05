@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edge Detection Web Viewer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .viewer-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .image-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .image-container h3 {
+            margin-top: 0;
+            color: #ffd700;
+        }
+        
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stats-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-online {
+            background: #00ff88;
+            box-shadow: 0 0 10px #00ff88;
+        }
+        
+        .status-offline {
+            background: #ff4757;
+            box-shadow: 0 0 10px #ff4757;
+        }
+        
+        @media (max-width: 768px) {
+            .viewer-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Edge Detection Web Viewer</h1>
+        
+        <div class="stats-panel">
+            <h3>📊 Frame Statistics</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="fpsValue">0.0</div>
+                    <div class="stat-label">FPS</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="resolutionValue">640x480</div>
+                    <div class="stat-label">Resolution</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="processingTimeValue">0ms</div>
+                    <div class="stat-label">Processing Time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="frameCountValue">0</div>
+                    <div class="stat-label">Total Frames</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="viewer-section">
+            <div class="image-container">
+                <h3>📷 Original Frame</h3>
+                <canvas id="originalCanvas" width="640" height="480"></canvas>
+            </div>
+            
+            <div class="image-container">
+                <h3>🔍 Edge Detection Result</h3>
+                <canvas id="processedCanvas" width="640" height="480"></canvas>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="loadUserImage(event)">
+            <button onclick="document.getElementById('imageInput').click()">📁 Load Your Image</button>
+            <button onclick="loadSampleImage()">📁 Load Sample Image</button>
+            <button onclick="toggleSimulation()">▶️ Toggle Simulation</button>
+            <button onclick="exportFrame()">💾 Export Frame</button>
+            <button onclick="resetStats()">🔄 Reset Stats</button>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <span class="status-indicator status-offline" id="statusIndicator"></span>
+            <span id="statusText">Disconnected from Android App</span>
+        </div>
+    </div>
+    
+    <script src="dist/viewer.js"></script>
+</body>
+</html>
+
+
+
