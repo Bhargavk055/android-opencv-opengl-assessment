@@ -16,12 +16,13 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        externalNativeBuild {
-            cmake {
-                cppFlags "-std=c++14"
-                abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
-            }
-        }
+        // Temporarily disabled for basic testing
+        // externalNativeBuild {
+        //     cmake {
+        //         cppFlags "-std=c++14"
+        //         abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
+        //     }
+        // }
     }
 
     buildTypes {
@@ -31,12 +32,13 @@ android {
         }
     }
 
-    externalNativeBuild {
-        cmake {
-            path "src/main/cpp/CMakeLists.txt"
-            version "3.18.1"
-        }
-    }
+    // Temporarily disabled for basic testing
+    // externalNativeBuild {
+    //     cmake {
+    //         path "src/main/cpp/CMakeLists.txt"
+    //         version "3.18.1"
+    //     }
+    // }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

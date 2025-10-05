@@ -50,14 +50,14 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
     private int frameCount = 0;
     private long fpsStartTime = 0;
     
-    // Native methods
+    // Native methods - temporarily disabled for basic testing
     static {
-        System.loadLibrary("edgeDetection");
+        // System.loadLibrary("edgeDetection");
     }
     
-    public native void initOpenCV();
-    public native void processFrame(byte[] data, int width, int height, int[] output);
-    public native void cleanupOpenCV();
+    // public native void initOpenCV();
+    // public native void processFrame(byte[] data, int width, int height, int[] output);
+    // public native void cleanupOpenCV();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         setContentView(R.layout.activity_main);
         
         initViews();
-        initNative();
+        // initNative(); // Temporarily disabled
         checkCameraPermission();
         
         cameraExecutor = Executors.newSingleThreadExecutor();
@@ -88,7 +88,8 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
     }
     
     private void initNative() {
-        initOpenCV();
+        // initOpenCV(); // Temporarily disabled
+        Log.i(TAG, "Native initialization skipped for basic testing");
     }
     
     private void checkCameraPermission() {
@@ -162,9 +163,16 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         int width = image.getWidth();
         int height = image.getHeight();
         
-        // Process frame in native code
+        // Process frame in native code - temporarily disabled
         int[] processedData = new int[width * height];
-        processFrame(data, width, height, processedData);
+        // processFrame(data, width, height, processedData);
+        
+        // Temporary basic processing for testing
+        for (int i = 0; i < width * height && i < data.length; i++) {
+            int pixel = data[i] & 0xFF;
+            int inverted = 255 - pixel; // Simple inversion
+            processedData[i] = (0xFF << 24) | (inverted << 16) | (inverted << 8) | inverted;
+        }
         
         // Update renderer with processed data
         renderer.updateTexture(processedData, width, height);
@@ -221,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        cleanupOpenCV();
+        // cleanupOpenCV(); // Temporarily disabled
         if (cameraExecutor != null) {
             cameraExecutor.shutdown();
         }
