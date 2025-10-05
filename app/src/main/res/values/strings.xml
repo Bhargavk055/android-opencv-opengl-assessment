@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Edge Detection</string>
+    <string name="camera_permission_required">Camera permission is required for this app</string>
+    <string name="edge_detection_on">Edge Detection ON</string>
+    <string name="edge_detection_off">Edge Detection OFF</string>
+    <string name="show_raw">Show Raw</string>
+    <string name="show_processed">Show Processed</string>
+    <string name="fps_format">FPS: %.1f</string>
+</resources>
+
+
+
